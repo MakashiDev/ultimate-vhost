@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #e5e7eb;
+  background-color: #18181c;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #18181c 0%, #23232a 100%);
+  display: flex;
+  place-items: center;
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+a {
+  font-weight: 500;
+  color: #7dd3fc;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #38bdf8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+}
+
+input {
+  background: #18181c;
+  color: #e5e7eb;
+  border: 1px solid #29293f;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+input:focus {
+  border-color: #7dd3fc;
+  box-shadow: 0 0 0 2px #7dd3fc33;
+}
+
+button {
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.6em 1.4em;
+  font-size: 1em;
+  font-weight: 600;
+  background: linear-gradient(90deg, #7dd3fc 0%, #a5b4fc 100%);
+  color: #18181c;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 #00000022;
+}
+button:hover {
+  background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%);
+  color: #fff;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #23232a;
+}
+::-webkit-scrollbar-thumb {
+  background: #29293f;
+  border-radius: 4px;
+}
+
+.table-auto th, .table-auto td {
+  border: none;
+}
+
+/* Card and Section Styles */
+section, .card {
+  background: #23232a;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 32px 0 #00000033;
+  border: 1px solid #29293f;
+}
+
+/* Smooth transitions for interactive elements */
+input, button, .card, section, table, th, td {
+  transition: all 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* Table row hover */
+tr:hover {
+  background: #18181c;
+}
+
+/* Footer */
+footer {
+  color: #6b7280;
+  opacity: 0.7;
+  font-size: 0.95rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  #root, .card, section {
+    padding: 0.5rem !important;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+}

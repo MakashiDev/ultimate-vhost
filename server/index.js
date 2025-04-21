@@ -21,7 +21,7 @@ function addLog(message) {
   if (message.includes("/api/logs") || (message.includes("/api/debug")) || (message.includes("/api/analytics")) || (message.includes("/api/server-stats"))) {
     return;
   }
-  const timestamp = new Date().toISOString();
+  const timestamp = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
   const logEntry = `[${timestamp}] ${message}`;
   console.log(logEntry); // Also log to console
   serverLogs.unshift(logEntry); // Add to the beginning

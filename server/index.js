@@ -142,6 +142,11 @@ async function setupProxyRoutes() {
 
 // API endpoints for route management
 app.post('/api/routes', async (req, res) => {
+  if (req.hostname === 'localhost') {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   try {
     const { hostname, targetUrl } = req.body;
     const route = await prisma.route.create({
@@ -159,11 +164,22 @@ app.post('/api/routes', async (req, res) => {
 });
 
 app.get('/api/routes', async (req, res) => {
+  if (req.hostname === 'localhost') {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   const routes = await prisma.route.findMany();
   res.json(routes);
 });
 
 app.delete('/api/routes/:id', async (req, res) => {
+  // check if hostname is localhost
+  if (req.hostname === 'localhost') {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   try {
     const id = parseInt(req.params.id);
     await prisma.route.delete({
@@ -182,6 +198,12 @@ app.delete('/api/routes/:id', async (req, res) => {
 
 // Edit route endpoint
 app.put('/api/routes/:id', async (req, res) => {
+  if (req.hostname === 'localhost') {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
+
   try {
     const id = parseInt(req.params.id);
     const { hostname, targetUrl } = req.body;
@@ -229,7 +251,7 @@ app.use((req, res, next) => {
           url: srcReq.url,
           ip: srcReq.ip,
           userAgent: srcReq.headers['user-agent']
-          
+
         });
         return proxyReqOpts;
       },
@@ -268,6 +290,10 @@ app.use("/debug", (req, res) => {
 
 // Endpoint to get logs
 app.get('/api/logs', (req, res) => {
+  if (req.hostname === 'localhost') {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
   res.json(serverLogs);
 });
 
@@ -286,6 +312,10 @@ app.use((req, res, next) => {
   next();
 });
 app.get('/api/analytics', (req, res) => {
+  if (req.hostname === 'localhost') {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
   const errorRate = analytics.totalRequests ? ((analytics.errorCount / analytics.totalRequests) * 100).toFixed(2) : 0;
   res.json({
     totalRequests: analytics.totalRequests,
@@ -293,6 +323,10 @@ app.get('/api/analytics', (req, res) => {
   });
 });
 app.get('/api/server-stats', async (req, res) => {
+  if (req.hostname === 'localhost') {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
   try {
     const [cpuData, memData] = await Promise.all([
       si.currentLoad(),

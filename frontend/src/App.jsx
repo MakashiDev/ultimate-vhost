@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 
 const API_URL = "http://localhost:3000";
 
@@ -117,8 +118,26 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#18181c] via-[#23232a] to-[#18181c] flex flex-col items-center justify-start py-12 px-4">
-      <header className="w-full max-w-4xl mb-10 flex flex-col items-center">
+    <div>
+      <SignedOut>
+        <div className="min-h-screen  flex flex-col items-center justify-center py-12 px-4">
+          <div className="flex flex-col gap-4">
+            <SignInButton mode="modal" className="bg-gradient-to-r from-[#7dd3fc] to-[#a5b4fc] text-[#18181c] font-bold px-6 py-2 rounded-lg shadow-md hover:from-[#38bdf8] hover:to-[#6366f1] transition-all duration-200" />
+            <SignUpButton mode="modal" className="bg-[#23232a] border border-[#29293f] text-white px-6 py-2 rounded-lg hover:bg-[#18181c] transition-all duration-200" />
+          </div>
+        </div>
+      </SignedOut>
+
+
+    <SignedIn>
+
+    <div className="min-h-screen min-w-screen  bg-gradient-to-br from-[#18181c] via-[#23232a] to-[#18181c] flex flex-col items-center justify-start py-12 px-4">
+      <header className="w-full max-w-4xl mb-10 flex flex-col items-center relative">
+        <div className="absolute top-0 right-0">
+          <UserButton
+          baseTheme="light"
+          />
+        </div>
         <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2 drop-shadow-lg">vHost Dashboard</h1>
         <p className="text-lg text-gray-400 font-medium mb-4">Modern Reverse Proxy Manager</p>
         <div className="flex gap-4">
@@ -260,6 +279,8 @@ function App() {
       <footer className="mt-12 text-gray-500 text-sm opacity-70">
         &copy; {new Date().getFullYear()} vHost. Crafted with <span className="text-[#f472b6]">♥</span> for modern infrastructure.
       </footer>
+    </div>
+    </SignedIn>
     </div>
   );
 }

@@ -14,6 +14,13 @@ const MAX_LOGS = 100;
 let serverLogs = [];
 
 function addLog(message) {
+  if (!message) return;
+  if (message.length > 1000) {
+    message = message.substring(0, 1000) + '...';
+  }
+  if (message.includes("/api/logs") || (message.includes("/api/debug")) || (message.includes("/api/analytics")) || (message.includes("/api/server-stats"))) {
+    return;
+  }
   const timestamp = new Date().toISOString();
   const logEntry = `[${timestamp}] ${message}`;
   console.log(logEntry); // Also log to console
@@ -29,7 +36,7 @@ app.use((req, res, next) => {
   const start = Date.now();
   const logRequest = () => {
     const duration = Date.now() - start;
-    const logMessage = `${req.id} ${req.method} ${req.url} ${res.statusCode} ${duration}ms`;
+    const logMessage = `${req.id} ${req.method} ${req.url} ${res.statusCode} ${duration}ms ${req.hostname}`;
     // console.log(`[${new Date().toISOString()}] ${logMessage}`); // Replaced by addLog
     addLog(logMessage);
   };
@@ -105,7 +112,9 @@ async function setupProxyRoutes() {
               route: route.hostname,
               target: route.targetUrl,
               method: srcReq.method,
-              url: srcReq.url
+              url: srcReq.url,
+              ip: srcReq.ip,
+              userAgent: srcReq.headers['user-agent']
             });
             return proxyReqOpts;
           },
@@ -217,7 +226,10 @@ app.use((req, res, next) => {
           route: matchedRoute.hostname,
           target: matchedRoute.targetUrl,
           method: srcReq.method,
-          url: srcReq.url
+          url: srcReq.url,
+          ip: srcReq.ip,
+          userAgent: srcReq.headers['user-agent']
+          
         });
         return proxyReqOpts;
       },

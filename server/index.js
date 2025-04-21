@@ -142,7 +142,7 @@ async function setupProxyRoutes() {
 
 // API endpoints for route management
 app.post('/api/routes', async (req, res) => {
-  if (req.hostname === 'localhost') {
+  if (req.hostname !== 'localhost') {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -164,7 +164,7 @@ app.post('/api/routes', async (req, res) => {
 });
 
 app.get('/api/routes', async (req, res) => {
-  if (req.hostname === 'localhost') {
+  if (req.hostname !== 'localhost') {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -175,7 +175,7 @@ app.get('/api/routes', async (req, res) => {
 
 app.delete('/api/routes/:id', async (req, res) => {
   // check if hostname is localhost
-  if (req.hostname === 'localhost') {
+  if (req.hostname !== 'localhost') {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -198,7 +198,7 @@ app.delete('/api/routes/:id', async (req, res) => {
 
 // Edit route endpoint
 app.put('/api/routes/:id', async (req, res) => {
-  if (req.hostname === 'localhost') {
+  if (req.hostname !== 'localhost') {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -290,7 +290,7 @@ app.use("/debug", (req, res) => {
 
 // Endpoint to get logs
 app.get('/api/logs', (req, res) => {
-  if (req.hostname === 'localhost') {
+  if (req.hostname !== 'localhost') {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -312,7 +312,7 @@ app.use((req, res, next) => {
   next();
 });
 app.get('/api/analytics', (req, res) => {
-  if (req.hostname === 'localhost') {
+  if (req.hostname !== 'localhost') {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -323,7 +323,7 @@ app.get('/api/analytics', (req, res) => {
   });
 });
 app.get('/api/server-stats', async (req, res) => {
-  if (req.hostname === 'localhost') {
+  if (req.hostname !== 'localhost') {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }

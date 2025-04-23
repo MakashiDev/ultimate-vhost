@@ -1,4 +1,4 @@
-<img src="./frontend/public/logo.svg" alt="Logo" width="200" />
+<img src="./frontend/public/logo.svg" alt="Logo" width="400" />
 
 # ultimate vhost
 

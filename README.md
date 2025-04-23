@@ -1,4 +1,4 @@
-# new-vhost
+# ultimate vhost
 
 A dynamic reverse proxy server with route management, analytics, and logging, built with Node.js, Express, and Prisma.
 

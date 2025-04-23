@@ -1,3 +1,5 @@
+<img src="./frontend/public/logo.svg" alt="Logo" width="200" />
+
 # ultimate vhost
 
 A dynamic reverse proxy server with route management, analytics, and logging, built with Node.js, Express, and Prisma.

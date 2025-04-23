@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
+import logo from "../public/logo.svg";
 
 const API_URL = "http://localhost:3000";
 
@@ -133,6 +134,7 @@ function App() {
 
     <div className="min-h-screen min-w-screen  bg-gradient-to-br from-[#18181c] via-[#23232a] to-[#18181c] flex flex-col items-center justify-start py-12 px-4">
       <header className="w-full max-w-4xl mb-10 flex flex-col items-center relative">
+        <img src={logo} alt="Logo" className="logo" />
         <div className="absolute top-0 right-0">
           <UserButton
           baseTheme="light"
